@@ -11,12 +11,23 @@ const Navbar = ({ toggleSidebar, isSidebarOpen }) => {
       const searchResults = await axios.get(
         `http://localhost:8000/api/v1/users/search?query=${searchQuery}`
       );
-
-      console.log("Search Results...", searchResults);
-
       setSearchResults(searchResults.data);
     } catch (error) {
-      setError("Error in search requests!");
+      let errorMessage = "Something went wrong. Please try again.";
+
+      if (error.response) {
+        // ✅ Server responded with an error status
+        errorMessage =
+          error.response.data?.message || "Failed to fetch search results.";
+      } else if (error.request) {
+        // ✅ No response received from the server
+        errorMessage = "No response from server. Please check your connection.";
+      } else {
+        // ✅ Error setting up the request
+        errorMessage = `Error: ${error.message}`;
+      }
+
+      setError(errorMessage);
     }
   }, []);
   const debouncedSearch = useDebounce(handleSearch, 500);
