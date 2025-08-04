@@ -1,11 +1,21 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import { Sidebar, Navbar } from "../allFiles";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getLoggedInUser } from "../store/slices/userSlice";
 const Body = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-
+  const dispatch = useDispatch();
+  const accessToken = useSelector((state) => state.auth?.token);
+  const user = useSelector((state) => state.auth?.user);
   const toggleSidebar = () => setIsSidebarOpen((prev) => !prev);
+  const getUserApi = "http://localhost:8000/api/v1/users/getLoggedInUser";
 
+  useEffect(() => {
+    if (accessToken && !user) {
+      dispatch(getLoggedInUser({ getUserApi, accessToken }));
+    }
+  }, [accessToken, user, dispatch]);
   return (
     <div className="flex flex-col h-screen overflow-none">
       {/* Header */}
