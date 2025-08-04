@@ -1,14 +1,31 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { signupUser, signinUser } from "../../store/slices/userSlice.js";
 const Signup = () => {
   const [isPassword, setIsPassword] = useState(null);
   const [isSignupForm, setIsSignUpForm] = useState(true);
-
+  const [userData, setUserData] = useState({});
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.auth?.signinResponse);
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setUserData((prev) => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+  const signupApi = "http://localhost:8000/api/v1/users/signup";
+  const signinApi = "http://localhost:8000/api/v1/users/signin";
   const handleAuthentication = () => {
     if (!isSignupForm) {
-      console.log("Registered Successfully");
+      dispatch(signupUser({ signupApi, userData }));
+      setUserData({});
     } else {
-      console.log("LoggedIn Successfully");
+      dispatch(signinUser({ signinApi, credentials: userData }));
+      // setUserData({});
+      navigate("/");
     }
   };
 
@@ -41,6 +58,9 @@ const Signup = () => {
                   </label>
                   <input
                     type="text"
+                    name="firstName"
+                    value={userData.firstName}
+                    onChange={handleChange}
                     placeholder="First Name"
                     className=" rounded-full input input-info !p-2 input-sm"
                   />
@@ -52,6 +72,9 @@ const Signup = () => {
                   </label>
                   <input
                     type="text"
+                    name="lastName"
+                    value={userData.lastName}
+                    onChange={handleChange}
                     placeholder="Last Name"
                     className=" rounded-full input input-info !p-2  input-sm"
                   />
@@ -62,6 +85,9 @@ const Signup = () => {
                   </label>
                   <input
                     type="text"
+                    name="phoneNumber"
+                    value={userData.phoneNumber}
+                    onChange={handleChange}
                     placeholder="Phone Number"
                     className=" rounded-full input input-info !p-2  input-sm"
                   />
@@ -74,6 +100,9 @@ const Signup = () => {
               </label>
               <input
                 type="text"
+                name="email"
+                value={userData.email}
+                onChange={handleChange}
                 placeholder="Email"
                 className=" rounded-full input input-info !p-2  input-sm"
               />
@@ -86,6 +115,9 @@ const Signup = () => {
               <div className="!outline-none rounded-full input input-info  input-sm">
                 <input
                   type={!isPassword ? "password" : ""}
+                  name="password"
+                  value={userData.password}
+                  onChange={handleChange}
                   placeholder="Password"
                   className=" !outline-none rounded-full  input input-info !p-2  input-sm"
                 />
