@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
-
-export const LiveClock = () => {
+export const LiveClock = ({
+  parentClass,
+  dateClass = "text-white font-bold font-mono text-lg",
+  timeClass = "text-white font-mono font-bold text-lg"
+}) => {
   const [currentTimeAndDate, setCurrentTimeAndDate] = useState(new Date());
 
   useEffect(() => {
@@ -17,17 +20,18 @@ export const LiveClock = () => {
     second: "2-digit",
     hour12: true
   });
+
   const formattedDate = currentTimeAndDate.toLocaleDateString("en-US", {
-    weekday: "short", // e.g., Mon
-    month: "short", // e.g., Jul
-    day: "2-digit", // e.g., 30
-    year: "numeric" // e.g., 2025
+    weekday: "short",
+    month: "short",
+    day: "2-digit",
+    year: "numeric"
   });
 
   return (
-    <p className="text-white font-bold flex flex-col tracking-wider font-mono text-lg ">
-      <span> {formattedTime}</span>
-      <span> {formattedDate}</span>
+    <p className={`${parentClass} flex flex-col`}>
+      <span className={`${timeClass}`}>{formattedTime}</span>
+      <span className={`${dateClass}`}>{formattedDate}</span>
     </p>
   );
 };
