@@ -1,11 +1,16 @@
 import { useCallback, useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { LiveClock, useDebounce } from "../../allFiles";
+import { logout } from "../../store/slices/userSlice";
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
 const Navbar = ({ toggleSidebar, isSidebarOpen }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [error, setError] = useState("");
+  const user = useSelector((state) => state.auth?.user);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const handleSearch = useCallback(async (searchQuery) => {
     try {
       const searchResults = await axios.get(
@@ -38,7 +43,10 @@ const Navbar = ({ toggleSidebar, isSidebarOpen }) => {
       debouncedSearch(searchQuery);
     }
   }, [searchQuery, debouncedSearch]);
-
+  const handleLogout = () => {
+    dispatch(logout());
+    navigate("/signup");
+  };
   return (
     <>
       <div className="navbar !pr-2 flex gap-2 min-h-14 shadow-sm bg-[#2196F3]">
@@ -129,7 +137,12 @@ const Navbar = ({ toggleSidebar, isSidebarOpen }) => {
                 </Link>
               </li>
               <li className="rounded-none">
-                <Link className="!p-1 rounded-none tracking-wide">Logout</Link>
+                <button
+                  onClick={handleLogout}
+                  className="!p-1 rounded-none tracking-wide"
+                >
+                  Logout
+                </button>
               </li>
             </ul>
           </div>
