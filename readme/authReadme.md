@@ -92,3 +92,82 @@ Role-based routing for Teachers, Students, and Admin.
 Token refresh logic for auto session renewal.
 
 UI improvements for better UX.
+README Update (Auth Component - Signup)
+Signup / Login Component
+This React component provides a combined Signup and Login form with improved user experience and error handling.
+
+Features
+Toggle between Signup and Login forms using a boolean state.
+
+Controlled form inputs with centralized state management.
+
+Password visibility toggle for better usability.
+
+Error handling: Displays user-friendly error messages on signup or login failures.
+
+Improved async flow: Waits for backend response before navigation, preventing premature redirects.
+
+Clears form inputs on both success and failure, maintaining clean state.
+
+How It Works
+Form Toggle
+
+A boolean state isSignupForm controls which form to show:
+
+true → Login form
+
+false → Signup form with extra fields (first name, last name, phone number)
+
+Input Handling
+
+userData state stores input values.
+
+handleChange updates the state on each input change.
+
+Authentication Handling
+
+On submit, calls handleAuthentication:
+
+For Signup, dispatches signupUser thunk with API URL and user data.
+
+For Login, dispatches signinUser thunk with API URL and credentials.
+
+Uses .unwrap() on thunk dispatch to access fulfilled/rejected promises.
+
+On success, navigates to homepage ("/").
+
+On failure, sets an error message displayed below the form.
+
+Always resets form data after submission attempt.
+
+Error Feedback
+
+Error messages from failed authentication attempts are shown in red text below the form inputs.
+
+Improves user understanding of issues like invalid credentials or server errors.
+
+Password Visibility
+
+Password input can toggle between masked and visible states with an emoji button.
+
+How to Use
+Import and render the Signup component wherever authentication is required.
+
+Make sure your Redux store includes signupUser and signinUser async thunks for handling authentication.
+
+Backend endpoints:
+
+POST /api/v1/users/signup for new user registration
+
+POST /api/v1/users/signin for user login
+
+Improvements Over Previous Version
+Proper async flow management using unwrap() to handle promise rejections.
+
+User feedback for authentication failures.
+
+Navigation only on successful login/signup.
+
+Form reset on both success and failure, ensuring clean form state.
+
+Enhanced error visibility to guide user actions.
