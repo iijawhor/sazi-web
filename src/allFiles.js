@@ -8,6 +8,10 @@ import Dashboard from "./componenets/Dashboard/Dashboard";
 import useDebounce from "./helpers/Debounce";
 import Actions from "./componenets/Me/Actions";
 import Timings from "./componenets/Me/Timings";
+import AttendanceStats from "./componenets/Me/AttendanceStats";
+import { calculateAverageHours } from "./helpers/calculateAverageHours";
+import { timeStringToMinutes } from "./helpers/convertHoursToMinute";
+import decimalHoursToHMS from "./helpers/decimalHoursToHMS";
 export {
   Body,
   Sidebar,
@@ -18,5 +22,9 @@ export {
   Dashboard,
   useDebounce,
   Actions,
-  Timings
+  Timings,
+  AttendanceStats,
+  calculateAverageHours,
+  timeStringToMinutes,
+  decimalHoursToHMS
 };
