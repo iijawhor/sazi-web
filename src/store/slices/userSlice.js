@@ -41,13 +41,10 @@ export const signinUser = createAsyncThunk(
         }
       });
       if (response.data) {
-        console.log("ZZZ", response.data.token);
         localStorage.setItem("token", response.data.token);
       }
       return response.data;
     } catch (error) {
-      console.log(error);
-
       return thunkAPI.rejectWithValue(
         error.response?.data?.message || "Signin failed"
       );
@@ -113,8 +110,6 @@ const authSlice = createSlice({
         state.error = null;
       })
       .addCase(signinUser.fulfilled, (state, action) => {
-        console.log("Signin Payload:", action.payload);
-
         state.loading = false;
         state.signinResponse = action.payload;
         state.user = action.payload.user;
@@ -132,8 +127,6 @@ const authSlice = createSlice({
         state.error = null;
       })
       .addCase(getLoggedInUser.fulfilled, (state, action) => {
-        console.log("Signin Payload:", action.payload);
-
         state.loading = false;
         // state.signinResponse = action.payload;
         state.user = action.payload.user;
