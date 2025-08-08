@@ -7,6 +7,7 @@ import Me from "./componenets/Me/Me";
 import Dashboard from "./componenets/Dashboard/Dashboard";
 import useDebounce from "./helpers/Debounce";
 import Actions from "./componenets/Me/Actions";
+import Timings from "./componenets/Me/Timings";
 export {
   Body,
   Sidebar,
@@ -16,5 +17,6 @@ export {
   Me,
   Dashboard,
   useDebounce,
-  Actions
+  Actions,
+  Timings
 };
