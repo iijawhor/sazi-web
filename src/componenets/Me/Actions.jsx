@@ -2,15 +2,13 @@ import React, { useState } from "react";
 import { LiveClock } from "../../allFiles";
 import { useDispatch, useSelector } from "react-redux";
 import { updateAttendanceStatus } from "../../store/slices/attendanceSlice";
-
+// removed logs and added style in h1 header tag taction - reminder for git oush
 const Actions = () => {
   const dispatch = useDispatch();
   const { loading, error } = useSelector((state) => state.attendance);
+  const [actionError, setActionError] = useState("");
   const accessToken = useSelector((state) => state.auth?.token);
-  console.log("Token in Action", accessToken);
   const [loggedIn, setLoggedIn] = useState(false);
-  console.log("AAAAAAAAAAA", loggedIn);
-
   const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
 
   const apiUrl = "http://localhost:8000/api/v1/attendance/attendance"; // ✅ Single API
@@ -27,7 +25,7 @@ const Actions = () => {
       ).unwrap();
       setLoggedIn(status === "in");
     } catch (err) {
-      console.error("API Error:", err);
+      setActionError(err || "Something went wrong");
     }
   };
 
@@ -52,7 +50,7 @@ const Actions = () => {
 
   return (
     <div className="flex flex-col w-full gap-1">
-      <h1>Actions</h1>
+      <h1 className="text-sm">Actions</h1>
       <div className="card h-48 w-full !p-1 bg-white text-black flex flex-row justify-center items-center shadow-sm">
         <div className="card-actions justify-center items-center w-full h-fit">
           <LiveClock
@@ -120,7 +118,9 @@ const Actions = () => {
           </div>
 
           {/* ✅ Error Display */}
-          {error && <p className="text-red-500 text-xs mt-2">{error}</p>}
+          {(error || actionError) && (
+            <p className="text-red-500 text-xs mt-2">{error || actionError}</p>
+          )}
         </div>
       </div>
     </div>
