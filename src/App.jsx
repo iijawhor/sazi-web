@@ -5,7 +5,7 @@ import { store } from "./store/sotre.js";
 function App() {
   return (
     <>
-      <Provider store={store}>
+      <Provider store={store} stabilityCheck="never">
         {" "}
         {/* ✅ Wrap with Provider */}
         <BrowserRouter basename="/">
