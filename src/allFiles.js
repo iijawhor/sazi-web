@@ -12,6 +12,9 @@ import AttendanceStats from "./componenets/Me/AttendanceStats";
 import { calculateAverageHours } from "./helpers/calculateAverageHours";
 import { timeStringToMinutes } from "./helpers/convertHoursToMinute";
 import decimalHoursToHMS from "./helpers/decimalHoursToHMS";
+import AttendanceLogs from "./componenets/Me/AttendanceLogs";
+import Log from "./componenets/Me/Log";
+import calculateGrossHour from "./helpers/GrossHours";
 export {
   Body,
   Sidebar,
@@ -26,5 +29,8 @@ export {
   AttendanceStats,
   calculateAverageHours,
   timeStringToMinutes,
-  decimalHoursToHMS
+  decimalHoursToHMS,
+  AttendanceLogs,
+  Log,
+  calculateGrossHour
 };

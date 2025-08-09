@@ -1,6 +1,6 @@
 function timeStringToMinutes(timeStr) {
-  // "HH:MM:SS" → total minutes
-  const [hours, minutes, seconds] = timeStr.split(":").map(Number);
-  return hours * 60 + minutes + seconds / 60;
+  if (!timeStr || typeof timeStr !== "string") return 0; // handle missing/invalid
+  const [h = 0, m = 0, s = 0] = timeStr.split(":").map(Number);
+  return h * 60 + m + s / 60;
 }
 export { timeStringToMinutes };

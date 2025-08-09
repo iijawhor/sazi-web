@@ -1,11 +1,11 @@
 import { timeStringToMinutes } from "./convertHoursToMinute";
-function calculateAverageHours(attendance) {
-  if (!attendance?.length) return 0;
+function calculateAverageHours(attendanceArray) {
+  if (!attendanceArray?.length) return 0;
 
   let totalMinutes = 0;
   let count = 0;
 
-  attendance.forEach(({ loggedInAt, loggedOutAt }) => {
+  attendanceArray.forEach(({ loggedInAt, loggedOutAt }) => {
     if (loggedInAt && loggedOutAt) {
       const inMinutes = timeStringToMinutes(loggedInAt);
       const outMinutes = timeStringToMinutes(loggedOutAt);
