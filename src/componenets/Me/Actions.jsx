@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { LiveClock } from "../../allFiles";
 import { useDispatch, useSelector } from "react-redux";
 import { updateAttendanceStatus } from "../../store/slices/attendanceSlice";
-// removed logs and added style in h1 header tag taction - reminder for git oush
 const Actions = () => {
   const dispatch = useDispatch();
   const { loading, error } = useSelector((state) => state.attendance);
@@ -50,7 +49,9 @@ const Actions = () => {
 
   return (
     <div className="flex flex-col w-full gap-1">
-      <h1 className="text-sm">Actions</h1>
+      <h1 className="text-sm font-[sans-serif] text-sm tracking-wide ">
+        Actions
+      </h1>
       <div className="card h-48 w-full !p-1 bg-white text-black flex flex-row justify-center items-center shadow-sm">
         <div className="card-actions justify-center items-center w-full h-fit">
           <LiveClock

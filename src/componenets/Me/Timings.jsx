@@ -9,10 +9,11 @@ const Timings = ({
     return day.toLocaleDateString("en-US", { weekday: "long" });
   });
   const today = new Date().toLocaleDateString("en-US", { weekday: "long" });
-  // added key to map fir git push
   return (
     <div className="flex flex-col w-full gap-1">
-      <h1 className="font-inter text-sm tracking-wide">Timings</h1>
+      <h1 className="text-sm font-[sans-serif] text-sm tracking-wide ">
+        Timings
+      </h1>
       <div className="card h-48 w-full !p-2 bg-white text-black flex flex-col shadow-sm">
         <div className="card-actions justify-start h-full">
           <div className="flex gap-3 items-center">
@@ -48,7 +49,7 @@ const Timings = ({
             <p className="text-xs font-mono tracking-tighter text-gray-600">
               Duration {classDuration}.
             </p>
-            <p className="flex items-center text-center text-xs font-mono text-gray-600">
+            <p className="flex items-center text-center text-xs font-[sans-serif] text-gray-600">
               <span>
                 <svg
                   width="25"
