@@ -6,6 +6,7 @@ import { getLoggedInUser } from "../store/slices/userSlice";
 const Body = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const accessToken = useSelector((state) => state.auth?.token);
   const user = useSelector((state) => state.auth?.user);
   const toggleSidebar = () => setIsSidebarOpen((prev) => !prev);
@@ -16,6 +17,12 @@ const Body = () => {
       dispatch(getLoggedInUser({ getUserApi, accessToken }));
     }
   }, [accessToken, user, dispatch]);
+  useEffect(() => {
+    if (!user) {
+      navigate("/signup");
+    }
+    navigate("/");
+  }, []);
   return (
     <div className="flex flex-col h-screen overflow-none">
       {/* Header */}
