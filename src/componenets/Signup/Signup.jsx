@@ -12,7 +12,8 @@ const Signup = () => {
     lastName: "",
     phoneNumber: "",
     email: "",
-    password: ""
+    password: "",
+    role: ""
   });
 
   const navigate = useNavigate();
@@ -104,7 +105,7 @@ const Signup = () => {
                     value={userData.firstName}
                     onChange={handleChange}
                     placeholder="First Name"
-                    className="rounded-full input input-info p-2 input-sm"
+                    className="rounded-full !p-1 input input-info p-2 input-sm"
                   />
                 </div>
                 {/* Last Name */}
@@ -116,7 +117,7 @@ const Signup = () => {
                     value={userData.lastName}
                     onChange={handleChange}
                     placeholder="Last Name"
-                    className="rounded-full input input-info p-2 input-sm"
+                    className="rounded-full !p-1 input input-info p-2 input-sm"
                   />
                 </div>
                 {/* Phone Number */}
@@ -128,7 +129,18 @@ const Signup = () => {
                     value={userData.phoneNumber}
                     onChange={handleChange}
                     placeholder="Phone Number"
-                    className="rounded-full input input-info p-2 input-sm"
+                    className="rounded-full !p-1 input input-info p-2 input-sm"
+                  />
+                </div>
+                <div className="flex flex-col lg:flex-row justify-between items-center">
+                  <label className="text-blue-900">Role</label>
+                  <input
+                    type="text"
+                    name="role"
+                    value={userData.role}
+                    onChange={handleChange}
+                    placeholder="User Role"
+                    className="rounded-full !p-1 input input-info p-2 input-sm"
                   />
                 </div>
               </>
@@ -143,7 +155,7 @@ const Signup = () => {
                 value={userData.email}
                 onChange={handleChange}
                 placeholder="Email"
-                className="rounded-full input input-info p-2 input-sm"
+                className="rounded-full !p-1 input input-info p-2 input-sm"
               />
             </div>
 
@@ -157,7 +169,7 @@ const Signup = () => {
                   value={userData.password}
                   onChange={handleChange}
                   placeholder="Password"
-                  className="outline-none flex-1 rounded-full input input-info p-2 input-sm"
+                  className="rounded-full !p-1 input input-info p-2 input-sm"
                 />
                 <p
                   onClick={() => setShowPassword((prev) => !prev)}
