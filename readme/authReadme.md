@@ -171,3 +171,75 @@ Navigation only on successful login/signup.
 Form reset on both success and failure, ensuring clean form state.
 
 Enhanced error visibility to guide user actions.
+
+## <!-- UPDATED VERSION OF SIGNUP -->
+
+# **Signup Component – Updated Version**
+
+## **Overview**
+
+This updated `Signup` component allows users to toggle between **Signup** and **Login** forms using a single UI.
+The fix ensures that the form now correctly displays signup-only fields (First Name, Last Name, Phone Number) **only** when the user is in "Sign Up" mode, and hides them during "Log In" mode.
+
+---
+
+## **Key Changes in This Version**
+
+- **Fixed Toggle Logic**
+
+  - `isSignupForm = true` now correctly shows the **Signup** fields.
+  - `isSignupForm = false` now correctly shows the **Login** fields only.
+
+- **Unified Component**
+
+  - Single component handles both Signup and Login actions.
+  - Dynamically switches the displayed form without navigation.
+
+- **Form State Management**
+
+  - `userData` state object holds all form inputs.
+  - Single `handleChange` method updates fields dynamically.
+
+- **API Integration**
+
+  - `signupUser` and `signinUser` actions from Redux slice handle authentication.
+  - API URLs configurable via `signupApi` and `signinApi`.
+
+- **User Experience**
+
+  - Password visibility toggle (`🙈 / 👁️`) for better usability.
+  - Clear error messages displayed when signup or login fails.
+  - Responsive design adjustments for mobile and desktop.
+
+---
+
+## **How the Toggle Works**
+
+- **Sign Up Mode (`isSignupForm = true`):**
+
+  - Shows **First Name**, **Last Name**, **Phone Number**, **Email**, and **Password** fields.
+  - Button text: `Signup`
+  - Switch link: "Already have an account? Log In"
+
+- **Login Mode (`isSignupForm = false`):**
+
+  - Shows only **Email** and **Password** fields.
+  - Button text: `Login`
+  - Switch link: "Don't have an account? Sign Up"
+
+---
+
+## **Benefits of This Update**
+
+- Eliminates confusion where signup fields were not showing.
+- Improves maintainability by keeping form logic centralized.
+- Makes future UI changes (e.g., adding extra fields) easier since logic is consistent.
+- Provides a smoother user experience with quick form switching.
+
+---
+
+## **Next Steps / Suggestions**
+
+- **remove public signup** later (Keka-style), you can easily hide the toggle and only show the login form.
+- Implement role-based access once authentication is complete.
+- Add form validation before sending API requests.
